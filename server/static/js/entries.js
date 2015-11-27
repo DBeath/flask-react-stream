@@ -20,7 +20,7 @@ var EntryList = React.createClass({
       dataType: 'json',
       cache: false,
       success: function(data) {
-        this.setState({data: entries});
+        this.setState({data: data.entries});
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.url, status, err.toString());

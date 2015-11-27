@@ -2,6 +2,7 @@ from flask import Flask, render_template, jsonify, request
 from server.models import db, Entry, EntrySchema, EntryFactory
 from datetime import datetime
 import os
+from pprint import pprint
 
 app = Flask(__name__)
 
@@ -26,7 +27,9 @@ def index():
 def entries():
     entries = Entry.query.order_by(Entry.posted.desc()).all()
     result = entries_schema.dump(entries)
-    return jsonify({'entries': result.data})
+    out = jsonify({'entries': result.data})
+    pprint(out.response)
+    return out
 
 @app.route('/entries/', methods=['POST'])
 def new_entry():
